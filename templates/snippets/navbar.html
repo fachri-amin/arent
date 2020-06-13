@@ -1,0 +1,50 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container">
+  <a class="navbar-brand" href="{% url 'redirectKeHome' %}"><b class="h1">ARent</b></a>
+  <!-- <form class="form-inline my-2 my-lg-0">
+    <input class="form-control mr-sm-2"  type="search" placeholder="Search" aria-label="Search">
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+  </form> -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ml-auto">
+        {% if user.is_active %}
+        <li class="nav-item dropdown">
+          <a class="mr-auto nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Welcome {{user.akunmitra.nama}}</a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            
+          
+          {% if not user.is_superuser %}
+            <div class="dropdown-item border-bottom">
+              <img style="height: 40px; width:auto; display: block;" src="/media/{{user.akunmitra.photo}}" class="card-img-top rounded-circle mr-auto ml-auto" alt="tidak ada poto profil">
+            </div>
+            <a class="dropdown-item" href="{% url 'mitra:updateUser' user.akunmitra.pk %}">Edit Profil</a>
+            <a class="dropdown-item" href="{% url 'mitra:tambahIklan' %}">Tambah Iklan</a>
+            <a class="dropdown-item" href="{% url 'mitra:iklanSaya' %}">Iklan Saya</a>
+            <a class="dropdown-item" href="{% url 'mitra:logout' %}">Logout</a>
+          {% else %}
+            <a class="dropdown-item" href="{% url 'admin:index' %}">Halaman Admin</a>
+            <a class="dropdown-item" href="{% url 'mitra:logout' %}">Logout</a>
+          {% endif %}
+                
+            
+            <!-- <a class="dropdown-item" href="{% url 'admin:index' %}">Halaman Admin</a> -->
+            
+              
+          </div>
+        </li>
+        {% else %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'mitra:login' %}">Login</a>
+          </li>
+          <div class="border border-secondary ml-4 mr-4"></div>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'mitra:registrasi' %}">Daftar</a>
+          </li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'mitra/css/style_detail_iklan.css' %}">
+{% endblock style %}
+    
+
+
+
+{% block contents %}
+<div class="container">
+    <div class="row">
+        <div class="judul-harga">
+            <h1 class="display-4">{{object.judul}}</h1>
+            <h1>Rp. {{object.harga_sewa}}/hari</h1>
+            <p class="text-secondary">{{object.mitra.akunmitra.provinsi}}</p>
+        </div>
+    </div>
+    <div class="row row-cols-2">
+        <div class="container col-lg-6">
+            <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner gambar-iklan">
+                    <div class="carousel-item active">
+                        <img src="/media/{{object.gambar}}" class="d-block ml-auto mr-auto" style="height: 400px;"alt="...">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 border border-dark">
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <td>Tanggal iklan</td>
+                        <td>: {{object.published}}</td>
+                    </tr>
+                    <tr>
+                        <td>Merk</td>
+                        <td>: {{object.merk}}</td>
+                    </tr>
+                    <tr>
+                        <td>Pemilik iklan</td>
+                        <td>: {{object.mitra.akunmitra.nama}}</td>
+                    </tr>
+                    <tr>
+                        <td>Kontak pemilik iklan</td>
+                        <td>: {{object.mitra.akunmitra.no_hp}}</td>
+                    </tr>
+                    <tr>
+                        <td>Deskripsi lain</td>
+                        <td>:</td>
+                    </tr>
+                    <tr>
+                        <td>{{object.deskripsi_lain|linebreaks}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p></p>
+        </div>
+
+    </div>
+</div>
+{% endblock contents %}
+    

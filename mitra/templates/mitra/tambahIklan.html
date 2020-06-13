@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+
+{% block contents %}
+<div class="container">
+    <form class="col-lg-8 pb-5" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% for component in iklanForm %}
+            <div class="form-group">
+                {{component.label}}
+                {{component}}
+            </div>
+        {% endfor %}
+        <button type="submit" class="btn btn-primary">Tambah</button>
+    </form>
+</div>
+{% endblock contents %}
+    

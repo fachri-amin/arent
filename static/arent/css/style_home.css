@@ -1,0 +1,21 @@
+.jumis{
+    background: url("../img/background_jumbotron.jpg");
+    height: 500px;
+    margin-top: -50px;
+    background-position-y: -250px; 
+    margin-bottom: 80px;
+}
+
+.cari-iklan{
+    margin-top: 10px;
+    overflow: auto;
+}
+
+.judul-copywriting{
+    margin-top: 100px;
+    text-shadow: 2px 2px 2px black;
+}
+
+.subjudul{
+    text-shadow: 2px 2px 5px black;
+}

@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+
+{% block contents %}
+    <div class="text-center mt-5 col-lg-4 pr-0 pl-0 pb-3 mr-auto ml-auto border shadow">
+        <div class="bg-warning text-center container-fluid pt-2 pb-1">
+            <p><b>Warning</b></p>
+        </div>
+        <p class="mt-5 mb-5">Apakah anda yakin untuk logout sebagai {{user}}?</p>
+        <form method="POST">
+            {% csrf_token %}
+            <input class="btn btn-danger col-lg-4" type="submit" name="logout" value="ya">
+            <input class="btn btn-primary col-lg-4" type="submit" name="logout" value="tidak">
+        </form>
+    </div>
+
+{% endblock contents %}

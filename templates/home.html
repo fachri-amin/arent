@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'arent/css/style_home.css' %}">
+{% endblock style %}
+
+
+{% block contents %}
+<div class="jumbotron jumbotron-fluid jumis">
+  <div class="">
+    <h1 class="display-4 text-white text-center display-4 judul-copywriting">Pilih kenyamanan perjalananmu di sini</h1>
+    <p class="text-center text-white subjudul">Nikmati setiap perjalananmu dengan roda dua dan empat yang disediakan
+      mitra kami di seluruh Indonesia</p>
+    <form method="GET" class="col-lg-6 ml-auto mr-auto cari-iklan">
+      {% csrf_token %}
+      <input name="cari" style="display: inline-block;" class="form-control form-control mt-4 col-lg-10 border-info"
+        type="text" placeholder="Cari Iklan">
+      <button type="submit" class="btn btn-primary mt-4 col-lg-2 col-sm-2 float-right" id="btn_cari">Cari</button>
+    </form>
+  </div>
+</div>
+<div class="row row-cols-2 mt-5 p-0 container-fluid">
+  <div class="col-lg-10 pl-4 pr-1">
+    {% for iklan in iklan_list %}
+    <div style="display: inline-block">
+
+      {% if iklan.golden_iklan %}
+      <div class="card mr-2 ml-2 mb-4 shadow-lg bg-warning" style="width: 18rem;">
+        <div style="width: 17rem; background-color: lightgray; margin:auto; margin-top: 4px; border-radius:4px;"
+          class="border-bottom">
+          <img style="height:150px; width: auto; display:block;" src="/media/{{iklan.gambar}}"
+            class="card-img-top ml-auto mr-auto" alt="Gambar tidak bisa dimuat">
+        </div>
+        <div class="card-body">
+          <h6 class="card-title">{{iklan.judul|truncatechars:20}}</h6>
+          <h4 class="card-title">Rp. {{iklan.harga_sewa}}/hari</h5>
+            <p class="card-text border-top">{{iklan.mitra.akunmitra.provinsi}}</p>
+            <a href="{% url 'mitra:detailIklan' iklan.slug %}" class="btn btn-primary">Lihat Iklan</a>
+        </div>
+      </div>
+
+      {% else %}
+      <div class="card mr-2 ml-2 mb-4 shadow-lg" style="width: 18rem;">
+        <div style="width: 17rem; background-color: lightgray; margin:auto; margin-top: 4px;  border-radius:4px;"
+          class="border-bottom">
+          <img style="height:150px; width: auto; display:block;" src="/media/{{iklan.gambar}}"
+            class="card-img-top ml-auto mr-auto" alt="Gambar tidak bisa dimuat">
+        </div>
+        <div class="card-body">
+          <h6 class="card-title">{{iklan.judul|truncatechars:20}}</h6>
+          <h4 class="card-title">Rp. {{iklan.harga_sewa}}/hari</h5>
+            <p class="card-text border-top">{{iklan.mitra.akunmitra.provinsi}}</p>
+            <a href="{% url 'mitra:detailIklan' iklan.slug %}" class="btn btn-primary">Lihat Iklan</a>
+        </div>
+      </div>
+      {% endif %}
+
+    </div>
+    <nav aria-label="Page navigation example">
+      <ul class="pagination col-lg-auto ml-5 mt-5">
+        {% if is_paginated %}
+        <li class="page-item">
+          {% if page_obj.has_previous %}
+          <a class="page-link" href="{% url 'home' page_obj.previous_page_number %}">Previous</a>
+          {% endif %}
+        </li>
+
+
+        {% for i in paginator.page_range %}
+        <li class="page-item">
+          {% if i == page_obj.number %}
+          <a class="page-link"><b>{{i}}</b></a>
+          {% else %}
+          <a class="page-link" href="{% url 'home' i %}">{{i}}</a>
+          {% endif %}
+        </li>
+        {% endfor %}
+
+        <li class="page-item">
+          {% if page_obj.has_next %}
+          <a class="page-link" href="{% url 'home' page_obj.next_page_number %}">Next</a>
+          {% endif %}
+        </li>
+        {% endif %}
+      </ul>
+    </nav>
+  </div>
+
+  <div class="col-lg-2 border-left">
+    <form method="GET">
+      {% csrf_token %}
+      {{provinsi_list}}
+      <br>
+      <input type="radio" name="jenis_kendaraan" value="sepeda_motor"><label for="">Sepeda Motor</label>
+      <input type="radio" name="jenis_kendaraan" value="mobil"><label for="">Mobil</label>
+      <br>
+      <button type="submit" class="btn btn-secondary" id="btn_filter">Filter</button>
+
+    </form>
+    =======
+    >>>>>>> parent of 00a33f3... menyelesaikan fitur filter
+  </div>
+  {% endfor %}
+</div>
+
+
+{% endblock contents %}
+
+
+{% block scripts %}
+<script src="{% static 'mitra/js/scripts_home.js' %}"></script>
+{% endblock scripts %}

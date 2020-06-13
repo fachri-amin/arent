@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+
+{% block contents %}
+{{error1}}
+{{error2}}
+<div class="container pb-5 shadow">
+    <h1>{{page_title}}</h1>
+    <form method="POST" class="col-lg-8" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        {% for user in userMitraForm %}
+        <div class="form-group">
+            {{user.label}}
+            {{user}}
+        </div>
+        {% endfor %}
+
+        {% for profile in profileMitraForm %}
+        <div class="form-group">
+            {{profile.label}}
+            {{profile}}
+        </div>
+        {% endfor %}
+
+        <button type="submit" class="btn btn-primary col-sm-4 mt-4">Daftar</button>
+
+    </form>
+
+    <!-- <form method="POST">
+        {{userMitraForm.as_table}}
+    </form> -->
+</div>
+{% endblock contents %}

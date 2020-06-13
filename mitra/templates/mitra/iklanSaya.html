@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+
+{% block contents %}
+<div class="container">
+  <h1>{{page_title}}</h1>
+  <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Judul Iklan</th>
+          <th scope="col">Harga Sewa per Hari</th>
+          <th scope="col">Jenis Kendaraan</th>
+          <th scope="col">Tipe Kendaraan</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+  {% for iklan in iklan_list %}
+      <tbody>
+        <tr>
+          <th scope="row">{{forloop.counter}}</th>
+          <td>{{iklan.judul}}</td>
+          <td>{{iklan.harga_sewa}}</td>
+          <td>{{iklan.jenis_kendaraan}}</td>
+          <td>{{iklan.tipe_kendaraan}}</td>
+          <td>
+              <a href="{% url 'mitra:detailIklan' iklan.slug %}" class="btn btn-warning">Lihat Iklan</a>
+              <a href="{% url 'mitra:deleteIklan' iklan.pk %}" class="btn btn-danger">Hapus Iklan</a>
+              <a href="{% url 'mitra:updateIklan' iklan.pk %}" class="btn btn-info">Edit Iklan</a>
+          </td>
+        </tr>
+      </tbody>
+  {% endfor %}
+  </table>
+  <!-- Batas -->
+  <br><br>
+  <a href="{% url 'mitra:tambahIklan' %}" class="btn btn-primary ml-4">Tambah Iklan</a>
+    
+</div>
+{% endblock contents %}
+    

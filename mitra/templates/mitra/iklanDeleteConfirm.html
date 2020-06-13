@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+
+{% block contents %}
+    <p>Apakah Anda yakin ingin menghapus iklan ini {{obj}}</p>
+    <form method="POST">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Ya</button>
+        <a href="{% url 'mitra:iklanSaya' %}" class="btn btn-secondary">Tidak</a>
+    </form>
+{% endblock contents %}
+    
