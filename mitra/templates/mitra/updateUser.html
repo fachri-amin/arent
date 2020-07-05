@@ -1,20 +1,27 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static '/mitra/css/style_update_user.css' %}">
+{% endblock style %}
+
 
 {% block contents %}
 <div class="container">
     <h1>Edit Akun</h1>
+    <img src="/media/{{ obj.photo }}" height="100" alt="">
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
-        
+
         {% for component in form %}
-            <div class="form-gorup">
-                {{component.label}}
-                {{component}}
-            </div>
+
+        <div class="form-group">
+            {{component.label}}
+            {{component}}
+        </div>
         {% endfor %}
-            
+
         <button type="submit" class="btn btn-primary">Edit</button>
     </form>
 </div>
 {% endblock contents %}
-    
