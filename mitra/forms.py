@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.auth.models import User
 from .models import AkunMitra, Iklan
 
+
 class AkunMitraForm(forms.ModelForm):
     class Meta:
         model = AkunMitra
@@ -13,43 +14,52 @@ class AkunMitraForm(forms.ModelForm):
             'photo',
         ]
         widgets = {
-            'nama':forms.TextInput(
+            'nama': forms.TextInput(
                 attrs={
-                    'class':'form-control',
-                    'placeholder':'Nama lengkap Anda',
+                    'class': 'form-control',
+                    'placeholder': 'Nama lengkap Anda',
                 },
             ),
-            'provinsi':forms.Select(
+            'provinsi': forms.Select(
                 attrs={
-                    'class':'form-control',
+                    'class': 'form-control',
                 },
             ),
-            'no_hp':forms.NumberInput(
+            'no_hp': forms.NumberInput(
                 attrs={
-                    'class':'form-control',
+                    'class': 'form-control',
                 },
             ),
-            #'photo':forms.ImageField(),
-            'alamat':forms.Textarea(
+            # 'photo':forms.ImageField(),
+            'alamat': forms.Textarea(
                 attrs={
-                    'class':'form-control'
+                    'class': 'form-control'
                 }
             )
         }
 
+
 class PilihProvinsiForm(forms.ModelForm):
+
+    def __init__(self, *args, **kwargs):
+        """ membuat NOT Required field """
+        super().__init__(*args, **kwargs)
+        self.fields['provinsi'].required = False
+
     class Meta:
         model = AkunMitra
         fields = [
             'provinsi'
         ]
         widgets = {
-            'provinsi':forms.Select(
+            'provinsi': forms.Select(
                 attrs={
-                    'class':'form-control',
+                    'class': 'form-control',
                 },
             ),
         }
+
+
 class UserMitra(forms.ModelForm):
     class Meta:
         model = User
@@ -58,26 +68,27 @@ class UserMitra(forms.ModelForm):
             'email',
             'password',
         ]
-        widgets= {
-            'email':forms.EmailInput(
+        widgets = {
+            'email': forms.EmailInput(
                 attrs={
-                    'class':'form-control',
-                    'placeholder':'Email Anda',
+                    'class': 'form-control',
+                    'placeholder': 'Email Anda',
                 },
             ),
-            'password':forms.PasswordInput(
+            'password': forms.PasswordInput(
                 attrs={
-                    'class':'form-control',
-                    'placeholder':'Password Anda',
+                    'class': 'form-control',
+                    'placeholder': 'Password Anda',
                 },
             ),
-            'username':forms.TextInput(
+            'username': forms.TextInput(
                 attrs={
-                    'class':'form-control',
-                    'placeholder':'Username Anda',
+                    'class': 'form-control',
+                    'placeholder': 'Username Anda',
                 },
             ),
         }
+
 
 class IklanForm(forms.ModelForm):
     class Meta:
@@ -92,42 +103,41 @@ class IklanForm(forms.ModelForm):
             'gambar',
         ]
         widgets = {
-            'judul':forms.TextInput(
+            'judul': forms.TextInput(
                 attrs={
-                    'class':'form-control',
-                    'placeholder':'Buat judul semenarik mungkin',
+                    'class': 'form-control',
+                    'placeholder': 'Buat judul semenarik mungkin',
                 },
             ),
-            'harga_sewa':forms.NumberInput(
+            'harga_sewa': forms.NumberInput(
                 attrs={
-                    'class':'form-control',
+                    'class': 'form-control',
                 }
             ),
-            'jenis_kendaraan':forms.Select(
+            'jenis_kendaraan': forms.Select(
                 attrs={
-                    'class':'form-control',
+                    'class': 'form-control',
                 },
             ),
-            'merk':forms.TextInput(
+            'merk': forms.TextInput(
                 attrs={
-                    'class':'form-control',
+                    'class': 'form-control',
                 },
             ),
-            'tipe_kendaraan':forms.TextInput(
+            'tipe_kendaraan': forms.TextInput(
                 attrs={
-                    'class':'form-control',
-                    'placeholder':'ex:supra, avanza dll',
+                    'class': 'form-control',
+                    'placeholder': 'ex:supra, avanza dll',
                 },
             ),
-            'deskripsi_lain':forms.Textarea(
+            'deskripsi_lain': forms.Textarea(
                 attrs={
-                    'class':'form-control',
+                    'class': 'form-control',
                 },
             ),
-            'gambar':forms.FileInput(
+            'gambar': forms.FileInput(
                 attrs={
-                    'class':'form-control',
+                    'class': 'form-control',
                 }
             )
         }
-    

@@ -15,8 +15,15 @@
       mitra kami di seluruh Indonesia</p>
     <form method="GET" class="col-lg-6 ml-auto mr-auto cari-iklan">
       {% csrf_token %}
+
+      {% if cari is not None%}
+      <input value="{{ cari }}" name="cari" style="display: inline-block;"
+        class="form-control form-control mt-4 col-lg-10 border-info" type="text" placeholder="Cari Iklan">
+      {% else %}
       <input name="cari" style="display: inline-block;" class="form-control form-control mt-4 col-lg-10 border-info"
         type="text" placeholder="Cari Iklan">
+      {% endif %}
+
       <button type="submit" class="btn btn-primary mt-4 col-lg-2 col-sm-2 float-right" id="btn_cari">Cari</button>
     </form>
   </div>
@@ -94,8 +101,21 @@
       {% csrf_token %}
       {{provinsi_list}}
       <br>
-      <input type="radio" name="jenis_kendaraan" value="sepeda_motor"><label for="">Sepeda Motor</label>
-      <input type="radio" name="jenis_kendaraan" value="mobil"><label for="">Mobil</label>
+      {% if cari_jenis_kendaraan == 'sepeda_motor' %}
+      <input type="radio" name="jenis_kendaraan" id="sepeda_motor" checked value="sepeda_motor"><label
+        for="sepeda_motor">Sepeda
+        Motor</label>
+      {% else %}
+      <input type="radio" name="jenis_kendaraan" id="sepeda_motor" value="sepeda_motor"><label for="sepeda_motor">Sepeda
+        Motor</label>
+      {% endif %}
+
+      {% if cari_jenis_kendaraan == 'mobil' %}
+      <input type="radio" name="jenis_kendaraan" id="mobil" checked value="mobil"><label for="mobil">Mobil</label>
+      {% else %}
+      <input type="radio" name="jenis_kendaraan" id="mobil" value="mobil"><label for="mobil">Mobil</label>
+      {% endif %}
+
       <br>
       <button type="submit" class="btn btn-secondary" id="btn_filter">Filter</button>
 

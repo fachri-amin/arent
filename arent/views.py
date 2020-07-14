@@ -16,6 +16,7 @@ class Home(ListView):
     def get_queryset(self):
         cari = self.request.GET.get('cari')
         cari_provinsi = self.request.GET.get('provinsi')
+        cari_jenis_kendaraan = self.request.GET.get('jenis_kendaraan')
         if cari != None:
             #object_list = Iklan.objects.filter(judul__icontains=cari)
             object_list = Iklan.objects.filter(Q(judul__icontains=cari) | Q(
@@ -33,6 +34,9 @@ class Home(ListView):
         self.kwargs.update({
             'page_title': 'Home',
             'provinsi_list': provinsi_list,
+            'cari': self.request.GET.get('cari'),
+            'cari_provinsi': self.request.GET.get('provinsi'),
+            'cari_jenis_kendaraan': self.request.GET.get('jenis_kendaraan'),
         })
         kwargs = self.kwargs
         context = super().get_context_data(**kwargs)
