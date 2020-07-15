@@ -2,9 +2,9 @@
 {% load static %}
 
 {% block style %}
-    <link rel="stylesheet" href="{% static 'mitra/css/style_detail_iklan.css' %}">
+<link rel="stylesheet" href="{% static 'mitra/css/style_detail_iklan.css' %}">
 {% endblock style %}
-    
+
 
 
 
@@ -22,7 +22,8 @@
             <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
                 <div class="carousel-inner gambar-iklan">
                     <div class="carousel-item active">
-                        <img src="/media/{{object.gambar}}" class="d-block ml-auto mr-auto" style="height: 400px;"alt="...">
+                        <img src="/media/{{object.gambar}}" class="d-block ml-auto mr-auto" style="height: 400px;"
+                            alt="...">
                     </div>
                 </div>
             </div>
@@ -61,4 +62,3 @@
     </div>
 </div>
 {% endblock contents %}
-    

@@ -17,20 +17,32 @@ class Home(ListView):
         cari = self.request.GET.get('cari')
         cari_provinsi = self.request.GET.get('provinsi')
         cari_jenis_kendaraan = self.request.GET.get('jenis_kendaraan')
+        object_list = self.model.objects.all().order_by(
+            '-golden_iklan', '-id')  # ini cara order by nya
         if cari != None:
-            #object_list = Iklan.objects.filter(judul__icontains=cari)
             object_list = Iklan.objects.filter(Q(judul__icontains=cari) | Q(
                 deskripsi_lain__icontains=cari) | Q(merk__icontains=cari) | Q(tipe_kendaraan__icontains=cari))
-        elif cari_provinsi != None:
+        elif cari_provinsi != 'default' and cari_provinsi != None:
             object_list = Iklan.objects.filter(
                 mitra__akunmitra__provinsi=cari_provinsi)
+        elif cari_jenis_kendaraan != None and cari_provinsi == 'default':
+            object_list = Iklan.objects.filter(
+                jenis_kendaraan=cari_jenis_kendaraan)
         else:
-            object_list = self.model.objects.all().order_by(
-                '-golden_iklan', '-id')  # ini cara order by nya
+            object_list = self.model.objects.all().order_by('-golden_iklan', '-id')
+        #! perbaiki filternya, masih belum seperti yang diharapkan
+        #! cari_provinsi bermasalah
+        # elif cari != None and cari_provinsi != None and cari_jenis_kendaraan != None:
+        #     object_list = Iklan.objects.filter(Q(judul__icontains=cari) | Q(
+        #         deskripsi_lain__icontains=cari) | Q(merk__icontains=cari) | Q(tipe_kendaraan__icontains=cari))
+        #     object_list = object_list.filter(
+        #         mitra__akunmitra__provinsi=cari_provinsi)
+        #     object_list = object_list.filter(
+        #         jenis_kendaraan=cari_jenis_kendaraan)
         return object_list
 
     def get_context_data(self, *args, **kwargs):
-        provinsi_list = PilihProvinsiForm
+        provinsi_list = PilihProvinsiForm()
         self.kwargs.update({
             'page_title': 'Home',
             'provinsi_list': provinsi_list,
