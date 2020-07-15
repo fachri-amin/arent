@@ -54,7 +54,7 @@ class PilihProvinsiForm(forms.ModelForm):
         widgets = {
             'provinsi': forms.Select(
                 attrs={
-                    'class': 'form-control',
+                    'class': 'cari-provinsi form-control',
                 },
             ),
         }

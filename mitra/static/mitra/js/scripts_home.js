@@ -1,13 +1,21 @@
-// const btn_filter = document.getElementById('btn_filter');
-// const btn_cari = document.getElementById('btn_cari');
+$(document).ready(function () {
+  const default_option = document.querySelector("select option:first-child");
 
-// function cariDiFilter(){
-//     btn_filter.onclick;
-//     console.log('test');
-// }
+  default_option.value = "default";
 
-// btn_cari.addEventListener('click', cariDiFilter);   
-
-const default_option = document.querySelector('select option:first-child');
-
-default_option.value = 'default';
+  $(".btn-cari").click(function (e) {
+    e.preventDefault();
+    $.ajax({
+      url: "",
+      type: "get",
+      data: {
+        cari: $(".cari").val(),
+        cari_provinsi: $(".cari-provinsi").val(),
+        cari_jenis_kendaraan: $("input[name=jenis_kendaraan]:checked").val(),
+      },
+      success: function (response) {
+        console.log(response);
+      },
+    });
+  });
+});
