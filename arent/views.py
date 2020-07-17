@@ -5,6 +5,8 @@ from mitra.models import AkunMitra, Iklan
 from mitra.forms import IklanForm, PilihProvinsiForm
 from django.db.models import Q
 from django.http import JsonResponse
+from django.core import serializers
+from django.forms.models import model_to_dict
 
 
 class Home(ListView):
@@ -60,8 +62,9 @@ class Home(ListView):
                 'provinsi': cari_provinsi,
                 'jenis_kendaraan': cari_jenis_kendaraan
             }
-            print(data)
-            return JsonResponse(data, status=200)
+
+            json_data = serializers.serialize('python', self.object_list)
+            return JsonResponse(json_data, safe=False, status=200)
         context = self.get_context_data()
         return self.render_to_response(context)
 
